@@ -1,3 +1,3 @@
 # PlaygroundDb
 
-**TODO: Add description**
+Ecto repository
