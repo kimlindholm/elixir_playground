@@ -26,10 +26,10 @@ defmodule PlaygroundWeb.ChannelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PlaygroundWeb.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PlaygroundDb.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(PlaygroundWeb.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(PlaygroundDb.Repo, {:shared, self()})
     end
 
     :ok
