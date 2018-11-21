@@ -4,10 +4,13 @@
 # the umbrella root.
 use Mix.Config
 
+# Do not include metadata nor timestamps in development logs
+config :logger, :console, format: "[$level] $message\n"
+
 # Configure your database
 config :playground_db, PlaygroundDb.Repo,
   username: "postgres",
   password: "postgres",
-  database: "playground_db_dev",
+  database: "playground_dev",
   hostname: "localhost",
   pool_size: 10

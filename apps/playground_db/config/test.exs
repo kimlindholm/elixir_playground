@@ -4,10 +4,13 @@
 # the umbrella root.
 use Mix.Config
 
+# Print only warnings and errors during test
+config :logger, level: :warn
+
 # Configure your database
 config :playground_db, PlaygroundDb.Repo,
   username: "postgres",
   password: "postgres",
-  database: "playground_db_test",
+  database: "playground_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

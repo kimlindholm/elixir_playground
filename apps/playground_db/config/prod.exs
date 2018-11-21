@@ -4,4 +4,7 @@
 # the umbrella root.
 use Mix.Config
 
-import_config "prod.secret.exs"
+# Do not print debug messages in production
+config :logger, level: :info
+
+# import_config "prod.secret.exs"
