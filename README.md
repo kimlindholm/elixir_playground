@@ -10,8 +10,13 @@
 
 ## Development
 
+Some tools need to be installed globally:
+
+    $ mix archive.install hex sobelow
+
 ### Code Analysis
 
+    $ mix sobelow --config -r apps/playground_web
     $ mix credo
 
 ## Installation
