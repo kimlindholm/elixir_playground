@@ -16,7 +16,10 @@ defmodule ElixirPlayground.MixProject do
   #
   # Run "mix help deps" for examples and options.
   defp deps do
-    []
+    [
+      # Code analysis
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false}
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

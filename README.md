@@ -8,6 +8,12 @@
 * Elixir 1.7 or later
 * Erlang 21 or later
 
+## Development
+
+### Code Analysis
+
+    $ mix credo
+
 ## Installation
 
 To start your Phoenix server:
