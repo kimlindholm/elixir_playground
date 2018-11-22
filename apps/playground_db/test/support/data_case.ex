@@ -12,6 +12,7 @@ defmodule PlaygroundDb.DataCase do
   of the test unless the test case is marked as async.
   """
 
+  alias Ecto.Adapters.SQL.Sandbox
   use ExUnit.CaseTemplate
 
   using do
@@ -26,10 +27,10 @@ defmodule PlaygroundDb.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PlaygroundDb.Repo)
+    :ok = Sandbox.checkout(PlaygroundDb.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(PlaygroundDb.Repo, {:shared, self()})
+      Sandbox.mode(PlaygroundDb.Repo, {:shared, self()})
     end
 
     :ok
