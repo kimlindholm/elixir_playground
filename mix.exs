@@ -20,7 +20,10 @@ defmodule ElixirPlayground.MixProject do
     [
       # Code analysis
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.4", only: [:dev], runtime: false}
+      {:dialyxir, "~> 1.0.0-rc.4", only: [:dev], runtime: false},
+      # Code documentation
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]}
     ]
   end
 

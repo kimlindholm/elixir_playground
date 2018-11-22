@@ -21,6 +21,13 @@ Some tools need to be installed globally:
     $ mix credo
     $ mix dialyzer
 
+### Documentation
+
+Generate project documentation and check its quality:
+
+    $ mix docs
+    $ mix inch
+
 ## Installation
 
 To start your Phoenix server:
