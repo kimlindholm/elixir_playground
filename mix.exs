@@ -6,7 +6,8 @@ defmodule ElixirPlayground.MixProject do
       apps_path: "apps",
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: [ignore_warnings: ".dialyzer_ignore.exs"]
     ]
   end
 
@@ -18,7 +19,8 @@ defmodule ElixirPlayground.MixProject do
   defp deps do
     [
       # Code analysis
-      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.4", only: [:dev], runtime: false}
     ]
   end
 

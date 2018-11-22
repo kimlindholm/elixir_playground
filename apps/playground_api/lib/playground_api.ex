@@ -12,6 +12,7 @@ defmodule PlaygroundApi do
       :world
 
   """
+  @spec hello() :: atom()
   def hello do
     :world
   end
