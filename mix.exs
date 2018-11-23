@@ -23,7 +23,9 @@ defmodule ElixirPlayground.MixProject do
       {:dialyxir, "~> 1.0.0-rc.4", only: [:dev], runtime: false},
       # Code documentation
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
-      {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]}
+      {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]},
+      # Deployment
+      {:distillery, "~> 2.0"}
     ]
   end
 
