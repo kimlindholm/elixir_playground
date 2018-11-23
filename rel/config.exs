@@ -37,7 +37,13 @@ end
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :"^=`$uK4F&rj)*SqwEhe8~E/EOXaL*MCa8nO/Ab}V(|f[Ncm(O)Ab<.qsCx{2(A5="
+  set cookie: :crypto.hash(
+      :sha256,
+      System.get_env("COOKIE") ||
+        :crypto.strong_rand_bytes(32) |> Base.encode64 |> binary_part(0, 32)
+    )
+    |> Base.encode16
+    |> String.to_atom
   set vm_args: "rel/vm.args"
 end
 
@@ -47,7 +53,7 @@ end
 # will be used by default
 
 release :elixir_playground do
-  set version: "0.1.0"
+  set version: Mix.Project.config[:version]
   set applications: [
     :runtime_tools,
     playground_api: :permanent,

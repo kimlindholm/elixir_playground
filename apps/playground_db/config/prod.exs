@@ -8,3 +8,10 @@ use Mix.Config
 config :logger, level: :info
 
 # import_config "prod.secret.exs"
+
+config :playground_db, PlaygroundDb.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: "${DATABASE_URL}",
+  database: "",
+  ssl: true,
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "2")
