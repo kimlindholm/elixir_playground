@@ -4,24 +4,34 @@ defmodule PlaygroundDb.Posts.CommentsTest do
   alias PlaygroundDb.Posts.Comments
 
   describe "comments" do
-    alias PlaygroundDb.Posts.Comments.Comment
+    alias PlaygroundDb.Posts
+    alias Posts.Comments.Comment
+    alias Posts.Post
 
     @valid_attrs %{content: "some content"}
     @update_attrs %{content: "some updated content"}
     @invalid_attrs %{content: nil}
 
-    def comment_fixture(attrs \\ %{}) do
-      {:ok, comment} =
+    def post_fixture(attrs \\ %{}) do
+      {:ok, post} =
         attrs
-        |> Enum.into(@valid_attrs)
-        |> Comments.create_comment()
+        |> Enum.into(%{content: "some content"})
+        |> Posts.create_post()
+
+      post |> Repo.preload(:comments)
+    end
+
+    def comment_fixture(%Post{} = post \\ post_fixture(), attrs \\ %{}) do
+      attrs = Enum.into(attrs, @valid_attrs)
+      {:ok, comment} = Comments.create_comment(post, attrs)
 
       comment
     end
 
-    test "list_comments/0 returns all comments" do
-      comment = comment_fixture()
-      assert Comments.list_comments() == [comment]
+    test "list_comments/1 returns all comments for given post" do
+      post = post_fixture()
+      comment = comment_fixture(post)
+      assert Comments.list_comments(post) == [comment]
     end
 
     test "get_comment!/1 returns the comment with given id" do
@@ -29,13 +39,15 @@ defmodule PlaygroundDb.Posts.CommentsTest do
       assert Comments.get_comment!(comment.id) == comment
     end
 
-    test "create_comment/1 with valid data creates a comment" do
-      assert {:ok, %Comment{} = comment} = Comments.create_comment(@valid_attrs)
+    test "create_comment/2 with valid data creates a comment" do
+      post = post_fixture()
+      assert {:ok, %Comment{} = comment} = Comments.create_comment(post, @valid_attrs)
       assert comment.content == "some content"
     end
 
-    test "create_comment/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Comments.create_comment(@invalid_attrs)
+    test "create_comment/2 with invalid data returns error changeset" do
+      post = post_fixture()
+      assert {:error, %Ecto.Changeset{}} = Comments.create_comment(post, @invalid_attrs)
     end
 
     test "update_comment/2 with valid data updates the comment" do

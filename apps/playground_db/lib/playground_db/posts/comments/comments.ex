@@ -4,21 +4,22 @@ defmodule PlaygroundDb.Posts.Comments do
   """
 
   import Ecto.Query, warn: false
+  alias PlaygroundDb.Posts.{Comments.Comment, Post}
   alias PlaygroundDb.Repo
 
-  alias PlaygroundDb.Posts.Comments.Comment
-
   @doc """
-  Returns the list of comments.
+  Returns the list of comments for a post.
 
   ## Examples
 
-      iex> list_comments()
+      iex> list_comments(post)
       [%Comment{}, ...]
 
   """
-  def list_comments do
-    Repo.all(Comment)
+  def list_comments(%Post{} = post) do
+    Comment
+    |> where(post_id: ^post.id)
+    |> Repo.all()
   end
 
   @doc """
@@ -38,20 +39,22 @@ defmodule PlaygroundDb.Posts.Comments do
   def get_comment!(id), do: Repo.get!(Comment, id)
 
   @doc """
-  Creates a comment.
+  Creates a comment for a post.
 
   ## Examples
 
-      iex> create_comment(%{field: value})
+      iex> create_comment(post, %{field: value})
       {:ok, %Comment{}}
 
-      iex> create_comment(%{field: bad_value})
+      iex> create_comment(post, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_comment(attrs \\ %{}) do
+  def create_comment(%Post{} = post, attrs \\ %{}) do
+    attrs = Map.put(attrs, :post_id, post.id)
+
     %Comment{}
-    |> Comment.changeset(attrs)
+    |> Comment.create_changeset(attrs)
     |> Repo.insert()
   end
 
@@ -69,12 +72,12 @@ defmodule PlaygroundDb.Posts.Comments do
   """
   def update_comment(%Comment{} = comment, attrs) do
     comment
-    |> Comment.changeset(attrs)
+    |> Comment.update_changeset(attrs)
     |> Repo.update()
   end
 
   @doc """
-  Deletes a Comment.
+  Deletes a comment.
 
   ## Examples
 
@@ -99,6 +102,6 @@ defmodule PlaygroundDb.Posts.Comments do
 
   """
   def change_comment(%Comment{} = comment) do
-    Comment.changeset(comment, %{})
+    Comment.update_changeset(comment, %{})
   end
 end

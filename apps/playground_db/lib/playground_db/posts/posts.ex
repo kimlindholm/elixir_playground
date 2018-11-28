@@ -4,9 +4,8 @@ defmodule PlaygroundDb.Posts do
   """
 
   import Ecto.Query, warn: false
-  alias PlaygroundDb.Repo
-
   alias PlaygroundDb.Posts.Post
+  alias PlaygroundDb.Repo
 
   @doc """
   Returns the list of posts.
@@ -18,7 +17,9 @@ defmodule PlaygroundDb.Posts do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Post
+    |> Repo.all()
+    |> Repo.preload(:comments)
   end
 
   @doc """
@@ -35,7 +36,11 @@ defmodule PlaygroundDb.Posts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id) do
+    Post
+    |> Repo.get!(id)
+    |> Repo.preload(:comments)
+  end
 
   @doc """
   Creates a post.

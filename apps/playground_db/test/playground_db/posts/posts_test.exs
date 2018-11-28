@@ -16,7 +16,7 @@ defmodule PlaygroundDb.PostsTest do
         |> Enum.into(@valid_attrs)
         |> Posts.create_post()
 
-      post
+      post |> Repo.preload(:comments)
     end
 
     test "list_posts/0 returns all posts" do
