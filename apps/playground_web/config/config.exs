@@ -18,6 +18,9 @@ config :playground_web, PlaygroundWeb.Endpoint,
 
 config :phoenix, :json_library, Jason
 
+config :playground_web,
+  api_base_url: "http://localhost:4003/api/v1"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

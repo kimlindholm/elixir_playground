@@ -21,6 +21,9 @@ config :playground_web, PlaygroundWeb.Endpoint,
   url: [host: "${APP_NAME}.gigalixirapp.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :playground_web,
+  api_base_url: "${API_BASE_URL}"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
