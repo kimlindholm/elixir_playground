@@ -8,8 +8,11 @@ defmodule PlaygroundApi.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      # Starts a worker by calling: PlaygroundApi.Worker.start_link(arg)
-      # {PlaygroundApi.Worker, arg},
+      Plug.Cowboy.child_spec(
+        scheme: :http,
+        plug: PlaygroundApi.Endpoint,
+        options: [port: Application.get_env(:playground_api, :port)]
+      )
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

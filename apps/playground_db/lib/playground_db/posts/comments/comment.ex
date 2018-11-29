@@ -7,6 +7,8 @@ defmodule PlaygroundDb.Posts.Comments.Comment do
   import Ecto.Changeset
   alias PlaygroundDb.Posts.Post
 
+  @derive {Jason.Encoder, only: [:id, :content]}
+
   schema "comments" do
     field :content, :string
     belongs_to :post, Post

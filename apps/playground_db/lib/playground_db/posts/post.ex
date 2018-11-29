@@ -7,6 +7,8 @@ defmodule PlaygroundDb.Posts.Post do
   import Ecto.Changeset
   alias PlaygroundDb.Posts.Comments.Comment
 
+  @derive {Jason.Encoder, only: [:id, :content, :comments]}
+
   schema "posts" do
     field :content, :string
     # foreign key: delete_all

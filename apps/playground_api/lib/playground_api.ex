@@ -1,6 +1,6 @@
 defmodule PlaygroundApi do
   @moduledoc """
-  Documentation for PlaygroundApi.
+  REST JSON:API.
   """
 
   @doc """
