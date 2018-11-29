@@ -8,8 +8,11 @@ defmodule Playground.ApiClient do
       use Tesla
 
       @base_url Application.get_env(:playground_web, :api_base_url)
+      @username Application.get_env(:playground_web, :api_username)
+      @password Application.get_env(:playground_web, :api_password)
 
       plug Tesla.Middleware.BaseUrl, @base_url
+      plug Tesla.Middleware.BasicAuth, username: @username, password: @password
       plug Tesla.Middleware.FollowRedirects
       plug Tesla.Middleware.JSON
       plug Tesla.Middleware.Compression

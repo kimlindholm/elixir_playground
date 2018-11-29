@@ -16,6 +16,12 @@ defmodule Playground.Posts do
           ...
         ]
       }
+
+      iex> list_latest_posts()
+      {:error, 401, "Unauthorized"}
+
+      iex> list_latest_posts()
+      {:error, nil, :econnrefused}
   """
   def list_latest_posts do
     query = [sort: "-id", page: [limit: 3, offset: 0]]

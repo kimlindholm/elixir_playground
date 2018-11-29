@@ -11,8 +11,12 @@ defmodule PlaygroundApi.Endpoint do
   alias PlaygroundDb.Posts.Post
   alias PlaygroundDb.Repo
 
+  @username Application.get_env(:playground_api, :basic_auth_username)
+  @password Application.get_env(:playground_api, :basic_auth_password)
+
   @whitelist ~w(id content comments)
 
+  plug(PlaygroundApi.BasicAuth, username: @username, password: @password)
   plug(Plug.Logger)
   plug(:match)
   plug(Plug.Parsers, parsers: [:json], json_decoder: Jason)

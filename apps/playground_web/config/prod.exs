@@ -22,7 +22,9 @@ config :playground_web, PlaygroundWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :playground_web,
-  api_base_url: "${API_BASE_URL}"
+  api_base_url: "${API_BASE_URL}",
+  api_username: "${API_USERNAME}",
+  api_password: "${API_PASSWORD}"
 
 # ## SSL Support
 #

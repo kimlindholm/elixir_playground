@@ -21,6 +21,11 @@ use Mix.Config
 #     config :logger, level: :info
 #
 
+config :playground_api,
+  basic_auth_username: "admin",
+  basic_auth_password: "letmein",
+  basic_auth_realm: "Admin"
+
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
 # by uncommenting the line below and defining dev.exs, test.exs and such.
