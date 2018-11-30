@@ -17,9 +17,10 @@ defmodule PlaygroundApi.BasicAuth do
   end
 
   defp verify(conn, attempted_auth, username: username, password: password) do
-    case encode(username, password) do
-      ^attempted_auth -> conn
-      _ -> unauthorized(conn)
+    if Plug.Crypto.secure_compare(encode(username, password), attempted_auth) do
+      conn
+    else
+      unauthorized(conn)
     end
   end
 
